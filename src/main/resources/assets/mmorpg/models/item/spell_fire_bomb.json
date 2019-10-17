@@ -1,0 +1,7 @@
+
+{
+    "parent": "mmorpg:tome",
+    "textures": {
+        "layer0": "mmorpg:items/spells/spell_fire_bomb"
+    }
+}

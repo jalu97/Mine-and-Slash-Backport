@@ -1,0 +1,76 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }			
+    }
+    dependencies {
+		classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+		classpath 'com.google.code.gson:gson:2.8.5'
+    }
+}
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+version = "1.9.0"
+
+group = "com.robertx22.mine_and_slash" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "Mine and Slash-1.12.2"
+
+sourceCompatibility = targetCompatibility = '1.8'
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+}
+
+minecraft {
+    version = "1.12.2-14.23.5.2836"
+    runDir = "run"
+    mappings = "stable_39"
+}
+
+repositories {
+    jcenter()	
+	maven { 
+		name = "jitpack"
+		url "https://jitpack.io" 
+	}
+	 maven { url = "http://maven2.tterrag.com" } // AutoSave
+	 maven { url 'https://maven.blamejared.com' }
+}
+
+configurations {
+    shade
+    compile.extendsFrom shade
+}
+
+configurations {
+    embed
+	compile.extendsFrom(embed)
+}
+
+dependencies {
+
+	compile files("libs/Baubles-1.12-1.5.2.jar") // Rings, REQUIRED
+	shade 'net.objecthunter:exp4j:0.4.5' // Gui Stuff dependency, REQUIRED
+	compile 'com.google.code.gson:gson:2.8.5' // Serialize More Difficult Configs, REQUIRED
+	compile "info.loenwind.autosave:AutoSave:1.12.2-1.0.10" // Auto Nbt Saving, REQUIRED
+    embed "info.loenwind.autosave:AutoSave:1.12.2-1.0.10"
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+jar {
+   from configurations.embed.collect {
+    it.isDirectory() ? it : zipTree(it).matching {
+        exclude 'META-INF', 'META-INF/**'
+    }
+}
+}

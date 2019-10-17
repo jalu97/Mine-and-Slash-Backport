@@ -3,7 +3,7 @@ package com.robertx22.mine_and_slash.tests;
 import com.robertx22.mine_and_slash.database.IGUID;
 import com.robertx22.mine_and_slash.db_lists.registry.ISlashRegistryEntry;
 import net.minecraft.item.Item;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class ValidateGuids {
     public static void validate() {

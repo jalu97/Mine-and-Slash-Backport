@@ -1,20 +1,15 @@
 package com.robertx22.mine_and_slash.world_gen.structures;
 
-import com.mojang.datafixers.Dynamic;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.StructurePieceRegisters;
 import com.robertx22.mine_and_slash.world_gen.structures.bases.StructurePieceData;
 import com.robertx22.mine_and_slash.mmorpg.Ref;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.PlayerUtils;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.ScatteredStructure;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.StructureStart;
-import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.minecraft.world.gen.structure.StructureStart;
+import net.minecraft.world.gen.structure.template.TemplateManager;
+import scala.Dynamic;
 
 import java.util.function.Function;
 

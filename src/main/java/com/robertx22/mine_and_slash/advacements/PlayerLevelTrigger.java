@@ -9,10 +9,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.robertx22.mine_and_slash.mmorpg.Ref;
 import com.robertx22.mine_and_slash.uncommon.capability.EntityCap;
+
+import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.ICriterionInstance;
 import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.advancements.PlayerAdvancements;
-import net.minecraft.advancements.criterion.CriterionInstance;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.List;
@@ -68,12 +69,12 @@ public class PlayerLevelTrigger implements ICriterionTrigger<PlayerLevelTrigger.
 
     }
 
-    public static class Instance extends CriterionInstance {
+    public static class Instance extends Criterion {
 
         public int level;
 
         public Instance(int level) {
-            super(PlayerLevelTrigger.ID);
+            super((ICriterionInstance) PlayerLevelTrigger.ID);
             this.level = level;
         }
 

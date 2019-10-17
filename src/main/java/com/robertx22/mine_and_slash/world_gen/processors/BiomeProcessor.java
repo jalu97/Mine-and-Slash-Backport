@@ -1,22 +1,17 @@
 package com.robertx22.mine_and_slash.world_gen.processors;
 
 import com.google.common.collect.ImmutableMap;
-import com.mojang.datafixers.Dynamic;
-import com.mojang.datafixers.types.DynamicOps;
 import com.robertx22.mine_and_slash.database.world_providers.BirchForestIWP;
 import com.robertx22.mine_and_slash.database.world_providers.IWP;
 import com.robertx22.mine_and_slash.db_lists.initializers.WorldProviders;
 import com.robertx22.mine_and_slash.db_lists.registry.SlashRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.state.IProperty;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.template.IStructureProcessorType;
-import net.minecraft.world.gen.feature.template.PlacementSettings;
-import net.minecraft.world.gen.feature.template.StructureProcessor;
-import net.minecraft.world.gen.feature.template.Template;
+import net.minecraft.world.gen.structure.template.Template;
+import net.minecraftforge.common.WorldWorkerManager.IWorker;
 
 import javax.annotation.Nullable;
 
@@ -41,26 +36,26 @@ public class BiomeProcessor extends StructureProcessor {
 
     @Nullable
     @Override
-    public Template.BlockInfo process(IWorldReader iWorldReader, BlockPos blockPos,
+    public Template.BlockInfo process(IWorker iWorldReader, BlockPos blockPos,
                                       Template.BlockInfo blockInfo,
                                       Template.BlockInfo blockInfo1,
                                       PlacementSettings placementSettings) {
 
-        Block block = blockInfo1.state.getBlock();
+        Block block = blockInfo1.blockState.getBlock();
 
         if (iwp.biomeTheme().blocksReplaceMap.containsKey(block)) {
 
-            BlockState newstate = iwp.biomeTheme().blocksReplaceMap.get(block)
+            IBlockState newstate = iwp.biomeTheme().blocksReplaceMap.get(block)
                     .getBlockToReplaceWith(block)
                     .getDefaultState();
 
-            for (IProperty prop : blockInfo1.state.getProperties()) {
+            for (IProperty prop : blockInfo1.blockState.getProperties()) {
                 if (newstate.has(prop)) {
-                    newstate = newstate.with(prop, blockInfo.state.get(prop));
+                    newstate = newstate.with(prop, blockInfo.blockState.get(prop));
                 }
             }
 
-            return new Template.BlockInfo(blockInfo1.pos, newstate, blockInfo1.nbt);
+            return new Template.BlockInfo(blockInfo1.pos, newstate, blockInfo1.tileentityData);
 
         }
 

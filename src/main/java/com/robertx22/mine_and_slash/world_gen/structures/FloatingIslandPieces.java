@@ -7,16 +7,14 @@ import com.robertx22.mine_and_slash.world_gen.processors.ChestProcessor;
 import com.robertx22.mine_and_slash.world_gen.structures.bases.BasePieces;
 import com.robertx22.mine_and_slash.world_gen.structures.bases.StructurePieceData;
 import com.robertx22.mine_and_slash.world_gen.structures.bases.TemplatePiece;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.gen.feature.structure.StructurePiece;
-import net.minecraft.world.gen.feature.template.BlockIgnoreStructureProcessor;
-import net.minecraft.world.gen.feature.template.StructureProcessor;
-import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.minecraft.world.gen.structure.StructureComponent;
+import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
@@ -41,7 +39,7 @@ public class FloatingIslandPieces {
 
     }
 
-    public static void init(StructurePieceData data, List<StructurePiece> pieces,
+    public static void init(StructurePieceData data, List<StructureComponent> pieces,
                             Random ran) {
         List<PosRot> sidePosRots = Arrays.asList(new PosRot(new BlockPos(15, 0, 0), Rotation.NONE), new PosRot(new BlockPos(0, 0, 15), Rotation.CLOCKWISE_180), new PosRot(new BlockPos(0, 0, 0), Rotation.CLOCKWISE_90), new PosRot(new BlockPos(15, 0, 15), Rotation.CLOCKWISE_180));
 
@@ -66,10 +64,10 @@ public class FloatingIslandPieces {
         data.height = 0;
 
         data.resource(CENTER);
-        pieces.add(new FloatingIslandPiece(data));
+        pieces.addAll((Collection<? extends StructureComponent>) new FloatingIslandPiece(data));
         data.height -= centerHeight;
         data.resource(BOTTOM_BIG);
-        pieces.add(new FloatingIslandPiece(data));
+        pieces.addAll((Collection<? extends StructureComponent>) new FloatingIslandPiece(data));
         data.height -= bigBottomHeight;
 
         for (PosRot posrot : sidePosRots) {
@@ -79,7 +77,7 @@ public class FloatingIslandPieces {
             data.rotation = data.rotation.add(posrot.rotation);
 
             data.resource(SIDE);
-            pieces.add(new FloatingIslandPiece(data));
+            pieces.addAll((Collection<? extends StructureComponent>) new FloatingIslandPiece(data));
             data.height -= 16;
 
         }

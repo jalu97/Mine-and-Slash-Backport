@@ -5,8 +5,9 @@ import com.robertx22.mine_and_slash.uncommon.capability.EntityCap.UnitData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Gear;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.DamageEffect;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.RepairUtils;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
@@ -18,10 +19,10 @@ public class MineAndSlashEvents {
 
         public int experience = 0;
         public UnitData playerCapability;
-        public LivingEntity entityKilled;
-        public PlayerEntity player;
+        public EntityLivingBase entityKilled;
+        public EntityPlayer player;
 
-        public GiveExpEvent(LivingEntity killed, PlayerEntity player, UnitData playerdata,
+        public GiveExpEvent(EntityLivingBase killed, EntityPlayer player, UnitData playerdata,
                             int exp) {
             super(player);
             this.entityKilled = killed;
@@ -38,7 +39,7 @@ public class MineAndSlashEvents {
 
         public DamageEffect data;
 
-        public OnDmgDoneEvent(LivingEntity entity, DamageEffect data) {
+        public OnDmgDoneEvent(EntityLivingBase entity, DamageEffect data) {
             super(entity);
             this.data = data;
         }
@@ -59,9 +60,9 @@ public class MineAndSlashEvents {
     public static class OnStatCalculation extends LivingEvent {
 
         public UnitData data;
-        public LivingEntity entityKilled;
+        public EntityLivingBase entityKilled;
 
-        public OnStatCalculation(LivingEntity entity, UnitData data) {
+        public OnStatCalculation(EntityLivingBase entity, UnitData data) {
             super(entity);
             this.data = data;
         }
@@ -73,7 +74,7 @@ public class MineAndSlashEvents {
 
         public List<GearItemData> gears;
 
-        public CollectGearStacksEvent(LivingEntity entity, List<GearItemData> gears) {
+        public CollectGearStacksEvent(EntityLivingBase entity, List<GearItemData> gears) {
             super(entity);
             this.gears = gears;
         }
@@ -99,7 +100,7 @@ public class MineAndSlashEvents {
                 return false;
             }
 
-            if (stack.isDamageable()) {
+            if (stack.isItemStackDamageable()) {
                 return RepairUtils.isItemBroken(stack) == false;
             }
 

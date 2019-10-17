@@ -2,11 +2,12 @@ package com.robertx22.mine_and_slash.world_gen.types;
 
 import com.robertx22.mine_and_slash.mmorpg.Ref;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IWeighted;
-import net.minecraft.block.Blocks;
+
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.feature.template.Template;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.structure.template.Template;
 
 public class FeatureType implements IWeighted {
 
@@ -29,7 +30,8 @@ public class FeatureType implements IWeighted {
     public int cantBeMoreThanXPercentNonAirBlocks = 100;
     public boolean requiresAirBlocks = false;
 
-    public boolean canSpawn(IWorld world, BlockPos pos, Template template) {
+    @SuppressWarnings("unlikely-arg-type")
+	public boolean canSpawn(World world, BlockPos pos, Template template) {
 
         if (requiresAirBlocks) {
 
@@ -47,14 +49,6 @@ public class FeatureType implements IWeighted {
 
         return true;
     }
-
-    /*
-    int getNonAirBlockPercent(World world, BlockPos pos, Template template) {
-
-        template.get
-
-    }
-    */
 
     public FeatureType lowerBy(int blocks) {
         this.lowerByXBlocks = blocks;

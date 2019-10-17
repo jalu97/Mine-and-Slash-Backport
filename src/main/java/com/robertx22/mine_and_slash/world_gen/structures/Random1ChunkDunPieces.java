@@ -8,10 +8,9 @@ import com.robertx22.mine_and_slash.world_gen.structures.bases.BasePieces;
 import com.robertx22.mine_and_slash.world_gen.structures.bases.StructurePieceData;
 import com.robertx22.mine_and_slash.world_gen.structures.bases.TemplatePiece;
 import com.robertx22.mine_and_slash.world_gen.types.FeatureType;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.world.gen.feature.structure.StructurePiece;
-import net.minecraft.world.gen.feature.template.StructureProcessor;
-import net.minecraft.world.gen.feature.template.TemplateManager;
+
+import net.minecraft.world.gen.structure.StructureComponent;
+import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +20,7 @@ public class Random1ChunkDunPieces {
 
     private static final List<FeatureType> LIST = Arrays.asList(Templates.dun0, Templates.dun1);
 
-    public static void init(StructurePieceData data, List<StructurePiece> pieces,
+    public static void init(StructurePieceData data, List<StructureComponent> pieces,
                             Random ran) {
 
         int rannum = ran.nextInt(LIST.size());

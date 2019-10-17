@@ -7,13 +7,12 @@ import com.robertx22.mine_and_slash.world_gen.processors.ChestProcessor;
 import com.robertx22.mine_and_slash.world_gen.structures.bases.BasePieces;
 import com.robertx22.mine_and_slash.world_gen.structures.bases.StructurePieceData;
 import com.robertx22.mine_and_slash.world_gen.structures.bases.TemplatePiece;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.gen.feature.structure.StructurePiece;
-import net.minecraft.world.gen.feature.template.StructureProcessor;
-import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.minecraft.world.gen.structure.StructureComponent;
+import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
@@ -27,7 +26,7 @@ public class TowerPieces extends BasePieces {
 
     static int FOUNDATION_HEIGHT = 4;
 
-    public static void init(StructurePieceData data, List<StructurePiece> pieces,
+    public static void init(StructurePieceData data, List<StructureComponent> pieces,
                             Random ran) {
 
         int middleAmount = ran.nextInt(3) + 1;
@@ -37,21 +36,21 @@ public class TowerPieces extends BasePieces {
         data.lowerIntoGroundBy = FOUNDATION_HEIGHT;
 
         data.resource(FOUNDATION_LOC);
-        pieces.add(new TowerPiece(data).first());
+        pieces.addAll((Collection<? extends StructureComponent>) new TowerPiece(data).first());
         data.height += height(data, FOUNDATION_LOC);
 
         data.resource(BOTTOM_LOC);
-        pieces.add(new TowerPiece(data));
+        pieces.addAll((Collection<? extends StructureComponent>) new TowerPiece(data));
         data.height += height(data, BOTTOM_LOC);
 
         data.resource(MIDDLE_LOC);
         for (int i = 0; i < middleAmount; i++) {
-            pieces.add(new TowerPiece(data));
+            pieces.addAll((Collection<? extends StructureComponent>) new TowerPiece(data));
             data.height += height(data, MIDDLE_LOC);
         }
 
         data.resource(TOP_LOC);
-        pieces.add(new TowerPiece(data).last());
+        pieces.addAll((Collection<? extends StructureComponent>) new TowerPiece(data).last());
 
     }
 

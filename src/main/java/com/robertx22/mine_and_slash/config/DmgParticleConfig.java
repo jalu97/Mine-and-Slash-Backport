@@ -1,27 +1,23 @@
 package com.robertx22.mine_and_slash.config;
 
-import net.minecraftforge.client.gui.ForgeGuiFactory.ForgeConfigGui;
-import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 
 public class DmgParticleConfig {
 
-    public Boolean ENABLE_FLOATING_EXP;
-    public Boolean ENABLE_FLOATING_DMG;
+    public ForgeConfigSpec.BooleanValue ENABLE_FLOATING_EXP;
+    public ForgeConfigSpec.BooleanValue ENABLE_FLOATING_DMG;
 
-    public Double GRAVITY;
-    public Double START_SIZE;
-    public Double MAX_SIZE;
-    public Double LIFESPAN;
-    public Double SPEED;
+    public ConfigValue<Double> GRAVITY;
+    public ConfigValue<Double> START_SIZE;
+    public ConfigValue<Double> MAX_SIZE;
+    public ConfigValue<Double> LIFESPAN;
+    public ConfigValue<Double> SPEED;
 
-    public Boolean GROWS;
+    public ConfigValue<Boolean> GROWS;
 
-    public DmgParticleConfig() {
-    	
-    	@Config.Name("Render Item On Ground Rarity Particles")
-    	@Config.LangKey("mmorpg.config.floating_exp")
-    	@Config.Comment(".")
-    	public boolean ENABLE_FLOATING_EXP = true;
+    public DmgParticleConfig(ForgeConfigSpec.Builder builder) {
+        builder.push("DMG_PARTICLE_CONFIGS");
 
         GRAVITY = builder.define("GRAVITY", 0.15D);
         START_SIZE = builder.define("START_SIZE", 1D);

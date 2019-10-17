@@ -2,58 +2,68 @@ package com.robertx22.mine_and_slash.config;
 
 import com.robertx22.mine_and_slash.a_libraries.neat_mob_overlay.NeatConfig;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayerGUIs;
-
-import net.minecraftforge.client.gui.ForgeGuiFactory.ForgeConfigGui;
-import net.minecraftforge.common.config.Config;
-import scala.Int;
-
 import org.apache.commons.lang3.tuple.Pair;
 
 public class ClientContainer {
-	
-	public static final String NAME = "CLIENT";
-    
-	public NeatConfig neatConfig;
+
+    public static final String NAME = "CLIENT";
+    public static final ForgeConfigSpec spec;
+    public static final ClientContainer INSTANCE;
+
+    static {
+        final Pair<ClientContainer, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder()
+                .configure(ClientContainer::new);
+        spec = specPair.getRight();
+        INSTANCE = specPair.getLeft();
+
+    }
+
+    public NeatConfig neatConfig;
     public DmgParticleConfig dmgParticleConfig;
-    
-    
-	@Config.Name("Render Item On Ground Rarity Particles")
-	@Config.LangKey("mmorpg.config.item_on_ground_particles")
-	@Config.Comment("Might help with finding gear, but could also be laggy")
-	public boolean RENDER_ITEM_ENTITY_RARITY_PARTICLES = false;
 
-	@Config.Name("Render Chat Combat Log")
-	@Config.LangKey("mmorpg.config.chat_combat_log")
-	@Config.Comment("Show/Disable Chat Damage Numbers")
-	public boolean RENDER_CHAT_COMBAT_LOG = false;
+    public BooleanValue SHOW_AFFIXED_NAME;
+    public BooleanValue RENDER_MOB_HEALTH_GUI;
+    public BooleanValue SHOW_LOW_ENERGY_MANA_WARNING;
+    public BooleanValue SHOW_VANILLA_HEARTS;
+    public BooleanValue SHOW_UNMET_GEAR_REQUIREMENTS_GUI;
+    public ForgeConfigSpec.IntValue REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES;
 
-	@Config.Name("Show Affixes In Item Names")
-	@Config.LangKey("")
-	@Config.Comment("")
-	public boolean SHOW_AFFIXED_NAME = true;
+    public EnumValue<PlayerGUIs> PLAYER_GUI_TYPE;
 
-	@Config.Name("Render Floating Damage Numbers")
-	@Config.LangKey("mmorpg.config.floating_damage_numbers")
-	@Config.Comment("Show/Disable Floating Damage Numbers when you attack mobs")
-	public boolean RENDER_FLOATING_DAMAGE = true;
+    ClientContainer(ForgeConfigSpec.Builder builder) {
+        builder.comment("Client Settings").push(NAME);
 
-	@Config.Name("Render Mob Health Bar")
-	@Config.LangKey("mmorpg.config.mob_health_bag")
-	@Config.Comment("Show/Disable mob health bars")
-	public boolean RENDER_MOB_HEALTH_GUI = true;
+        neatConfig = builder.configure(NeatConfig::new).getLeft();
+        dmgParticleConfig = builder.configure(DmgParticleConfig::new).getLeft();
 
-	@Config.Name("Show Low Ene/Mana Warnings")
-	@Config.LangKey("mmorpg.config.low_resource_warnings")
-	@Config.Comment("Posts them in chat if you can't cast spell or attakc")
-	public boolean SHOW_LOW_ENERGY_MANA_WARNING = false;
+        REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES = builder.comment(".")
+                .defineInRange("REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES", 35, 0, 1000);
 
-	@Config.Name("Show Floating Exp")
-	@Config.LangKey("mmorpg.config.floating_exp")
-	@Config.Comment("Shows how much exp you got from a mob kill. Can get annoying when you can't see your damage i assume.")
-	public boolean SHOW_FLOATING_EXP = false;
-	
-	@Config.Name("Mob GUI Overlay Toggle")
-	@Config.LangKey("mmorpg.config.mob_gui_overlay")
-	@Config.Comment("Choose whether or not to show the overhead GUI on mobs showing Level, Rarity, and Health.")
-	public boolean SHOW_MOB_GUI = true;
+        SHOW_AFFIXED_NAME = builder.comment(".")
+                .translation("mmorpg.config.show_item_affixes")
+                .define("SHOW_AFFIXED_NAME", true);
+
+        SHOW_UNMET_GEAR_REQUIREMENTS_GUI = builder.comment(".")
+                .translation("mmorpg.config.")
+                .define("SHOW_UNMET_GEAR_REQUIREMENTS_GUI", true);
+
+        SHOW_VANILLA_HEARTS = builder.comment(".")
+                .translation("mmorpg.config.show_vanilla_hearts")
+                .define("SHOW_VANILLA_HEARTS", true);
+
+        RENDER_MOB_HEALTH_GUI = builder.comment(".")
+                .translation("mmorpg.config.mob_health_bar")
+                .define("RENDER_MOB_HEALTH_GUI", true);
+
+        SHOW_LOW_ENERGY_MANA_WARNING = builder.comment(".")
+                .translation("mmorpg.config.low_resource_warnings")
+                .define("SHOW_LOW_ENERGY_MANA_WARNING", true);
+
+        PLAYER_GUI_TYPE = builder.comment(".")
+                .translation("mmorpg.config.player_gui_overlay_type")
+                .defineEnum("PLAYER_GUI_TYPE", PlayerGUIs.Bottom_Middle_Corners);
+
+        builder.pop();
+    }
+
 }

@@ -1,40 +1,39 @@
 package com.robertx22.mine_and_slash.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
+import scala.Double;
 
 public class StatConfig {
 
     public static final String NAME = "BASE_STATS";
 
-    public DoubleValue physical_damage;
-    public DoubleValue physical_damage_per_level;
-    public DoubleValue mana;
-    public DoubleValue mana_per_level;
-    public DoubleValue energy;
-    public DoubleValue energy_per_level;
-    public DoubleValue mana_regen;
-    public DoubleValue mana_regen_per_level;
-    public DoubleValue health_regen;
-    public DoubleValue health_regen_per_level;
-    public DoubleValue armor;
-    public DoubleValue armor_per_level;
-    public DoubleValue health;
-    public DoubleValue health_per_level;
+    public Double physical_damage;
+    public Double physical_damage_per_level;
+    public Double mana;
+    public Double mana_per_level;
+    public Double energy;
+    public Double energy_per_level;
+    public Double mana_regen;
+    public Double mana_regen_per_level;
+    public Double health_regen;
+    public Double health_regen_per_level;
+    public Double armor;
+    public Double armor_per_level;
+    public Double health;
+    public Double health_per_level;
 
-    public DoubleValue magic_shield;
-    public DoubleValue magic_shield_per_level;
-    public DoubleValue magic_shield_regen;
-    public DoubleValue magic_shield_regen_per_level;
+    public Double magic_shield;
+    public Double magic_shield_per_level;
+    public Double magic_shield_regen;
+    public Double magic_shield_regen_per_level;
 
-    public DoubleValue critical_hit;
-    public DoubleValue critical_hit_per_level;
-    public DoubleValue energy_regen;
-    public DoubleValue energy_regen_per_level;
-    public DoubleValue critical_damage;
-    public DoubleValue critical_damage_per_level;
-    public DoubleValue spell_damage;
-    public DoubleValue spell_damage_per_level;
+    public Double critical_hit;
+    public Double critical_hit_per_level;
+    public Double energy_regen;
+    public Double energy_regen_per_level;
+    public Double critical_damage;
+    public Double critical_damage_per_level;
+    public Double spell_damage;
+    public Double spell_damage_per_level;
 
     StatConfig(ForgeConfigSpec.Builder builder) {
         builder.push("PLAYER_BASE_STATS");

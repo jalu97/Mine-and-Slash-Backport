@@ -32,20 +32,21 @@ import com.robertx22.mine_and_slash.db_lists.registry.empty_entries.*;
 import com.robertx22.mine_and_slash.dimensions.MapManager;
 import com.robertx22.mine_and_slash.professions.recipe.BaseRecipe;
 import com.robertx22.mine_and_slash.uncommon.capability.EntityCap;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.world.IWorld;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.world.World;
 
 import java.util.HashMap;
 
 public class SlashRegistry {
 
-    public static DimensionConfig getDimensionConfig(IWorld world) {
+    public static DimensionConfig getDimensionConfig(World world) {
         String id = MapManager.getId(world);
         return DimensionConfigs().get(id);
 
     }
 
-    public static ModEntityConfig getEntityConfig(LivingEntity entity,
+    public static ModEntityConfig getEntityConfig(EntityLivingBase entity,
                                                   EntityCap.UnitData data) {
 
         String monster_id = entity.getType().getRegistryName().toString();

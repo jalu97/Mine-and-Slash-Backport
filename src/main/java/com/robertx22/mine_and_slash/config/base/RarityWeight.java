@@ -1,15 +1,15 @@
 package com.robertx22.mine_and_slash.config.base;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import scala.Int;
 
 public class RarityWeight {
 
-    public ForgeConfigSpec.IntValue COMMON_WEIGHT;
-    public ForgeConfigSpec.IntValue UNCOMMON_WEIGHT;
-    public ForgeConfigSpec.IntValue RARE_WEIGHT;
-    public ForgeConfigSpec.IntValue EPIC_WEIGHT;
-    public ForgeConfigSpec.IntValue LEGENDARY_WEIGHT;
-    public ForgeConfigSpec.IntValue MYTHICAL_WEIGHT;
+    public Int COMMON_WEIGHT;
+    public Int UNCOMMON_WEIGHT;
+    public Int RARE_WEIGHT;
+    public Int EPIC_WEIGHT;
+    public Int LEGENDARY_WEIGHT;
+    public Int MYTHICAL_WEIGHT;
 
     public static class DefaultConfig {
 

@@ -3,10 +3,11 @@ package com.robertx22.mine_and_slash.config.compatible_items.auto_gen;
 import com.robertx22.mine_and_slash.database.gearitemslots.bases.GearItemSlot;
 import com.robertx22.mine_and_slash.db_lists.registry.SlashRegistry;
 import com.robertx22.mine_and_slash.mmorpg.Ref;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
+
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.item.ItemArmor;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,9 +26,9 @@ public class GenAutoCompItems {
         public GearItemSlot slot;
         public Item item;
 
-        public EquipmentSlotType getSlot() {
+        public EntityEquipmentSlot getSlot() {
 
-            ArmorItem armor = (ArmorItem) item;
+        	ItemArmor armor = (ItemArmor) item;
             return armor.getEquipmentSlot();
 
         }

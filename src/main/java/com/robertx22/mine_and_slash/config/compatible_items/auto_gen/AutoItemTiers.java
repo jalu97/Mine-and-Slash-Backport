@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.config.compatible_items.auto_gen;
 
 import net.minecraft.item.*;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
 
 public enum AutoItemTiers {
 
@@ -22,9 +23,9 @@ public enum AutoItemTiers {
 
         float perc = 0;
 
-        if (item instanceof ArmorItem) {
-            ArmorItem armor = (ArmorItem) item;
-            IArmorMaterial mat = armor.getArmorMaterial();
+        if (item instanceof ItemArmor) {
+        	ItemArmor armor = (ItemArmor) item;
+            ArmorMaterial mat = armor.getArmorMaterial();
 
             perc += mat.getDamageReductionAmount(ctx.getSlot()) / ArmorMaterial.DIAMOND.getDamageReductionAmount(ctx
                     .getSlot());

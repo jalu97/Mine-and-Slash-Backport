@@ -1,13 +1,13 @@
 package com.robertx22.mine_and_slash.config.compatible_items.auto_gen;
 
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.IArmorMaterial;
-import net.minecraftforge.registries.ForgeRegistries;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class AvgMat {
 
@@ -28,7 +28,7 @@ public class AvgMat {
 
     }
 
-    private static void add(HashSet<IArmorMaterial> list, IArmorMaterial mat) {
+    private static void add(HashSet<ArmorMaterial> list, ArmorMaterial mat) {
 
         if (mat.getClass().isEnum() || !list.stream()
                 .anyMatch(x -> x.getClass().equals(mat.getClass()))) {
@@ -37,10 +37,10 @@ public class AvgMat {
         }
     }
 
-    public static ArmorValues getValues(IArmorMaterial mat) {
+    public static ArmorValues getValues(ArmorMaterial mat) {
 
         ArmorValues val = new ArmorValues();
-        EquipmentSlotType slot = EquipmentSlotType.CHEST;
+        EntityEquipmentSlot slot = EntityEquipmentSlot.CHEST;
         val.reduct = mat.getDamageReductionAmount(slot);
         val.tough = mat.getDurability(slot);
         val.ench = mat.getEnchantability();
@@ -51,12 +51,12 @@ public class AvgMat {
     public static ArmorValues GetAvgArmorValues() {
         ArmorValues val = new ArmorValues();
 
-        HashSet<IArmorMaterial> mats = new HashSet<>();
+        HashSet<ArmorMaterial> mats = new HashSet<>();
 
         ForgeRegistries.ITEMS.getValues()
                 .stream()
-                .filter(x -> x instanceof ArmorItem)
-                .forEach(x -> add(mats, ((ArmorItem) x).getArmorMaterial()));
+                .filter(x -> x instanceof ItemArmor)
+                .forEach(x -> add(mats, ((ItemArmor) x).getArmorMaterial()));
 
         List<ArmorValues> all = mats.stream()
                 .map(x -> getValues(x))

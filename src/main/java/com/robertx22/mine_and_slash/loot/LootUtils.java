@@ -5,8 +5,9 @@ import com.robertx22.mine_and_slash.db_lists.Rarities;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.Rarity;
 import com.robertx22.mine_and_slash.uncommon.capability.EntityCap.UnitData;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.RandomUtils;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.SlimeEntity;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 
@@ -49,7 +50,7 @@ public class LootUtils {
     }
 
     public static ItemStack RandomDamagedGear(ItemStack stack, Rarity rar, int level) {
-        if (stack.isDamageable()) {
+        if (stack.isItemStackDamageable()) {
 
             float lvlDuraPenalty; // easier at low lvls, harder at later
             if (level < 10) {
@@ -67,7 +68,7 @@ public class LootUtils {
 
             dmgMulti = MathHelper.clamp(dmgMulti, 0, 0.95F);
 
-            stack.setDamage((int) (dmgMulti * stack.getMaxDamage()));
+            stack.setItemDamage((int) (dmgMulti * stack.getMaxDamage()));
 
         }
 
@@ -75,7 +76,7 @@ public class LootUtils {
     }
 
     public static float applyLootMultipliers(float chance, UnitData mob,
-                                             LivingEntity entity) {
+    		EntityLivingBase entity) {
 
         float first = chance;
 
@@ -83,7 +84,7 @@ public class LootUtils {
 
         float after_mob_health = after_rarity * (1 + entity.getMaxHealth() / 20);
 
-        if (entity instanceof SlimeEntity) {
+        if (entity instanceof EntitySlime) {
             after_mob_health /= 15;
         }
 

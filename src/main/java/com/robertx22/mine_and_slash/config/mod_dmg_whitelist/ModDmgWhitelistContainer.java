@@ -12,7 +12,6 @@ public class ModDmgWhitelistContainer {
     public ModDmgWhitelistContainer() {
         this.modList.put("testmodid", new ModDmgWhitelist("testmodid", 0.5F));
         this.modList.put("testmodid2", new ModDmgWhitelist("testmodid2", 1F));
-        // this.modList.put("minecraft", new ModDmgWhitelist("minecraft", 1F));
 
     }
 

@@ -2,7 +2,8 @@ package com.robertx22.mine_and_slash.uncommon.datasaving;
 
 import com.robertx22.mine_and_slash.uncommon.capability.*;
 import com.robertx22.mine_and_slash.uncommon.capability.EntityCap.UnitData;
-import net.minecraft.entity.player.PlayerEntity;
+
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
@@ -19,7 +20,7 @@ public class Load {
     }
 
     public static PlayerStatsPointsCap.IPlayerStatPointsData statPoints(
-            PlayerEntity provider) {
+    		EntityPlayer provider) {
 
         if (provider != null) {
 
@@ -31,13 +32,13 @@ public class Load {
     }
 
     @Nonnull
-    public static PlayerTalentsCap.IPlayerTalentsData talents(PlayerEntity provider) {
+    public static PlayerTalentsCap.IPlayerTalentsData talents(EntityPlayer provider) {
 
         return provider.getCapability(PlayerTalentsCap.Data)
                 .orElse(new PlayerTalentsCap.DefaultImpl());
     }
 
-    public static WeaponSpeedCap.IWeaponSpeedCap weaponSpeed(PlayerEntity provider) {
+    public static WeaponSpeedCap.IWeaponSpeedCap weaponSpeed(EntityPlayer provider) {
 
         if (provider != null) {
 
@@ -48,7 +49,7 @@ public class Load {
         return null;
     }
 
-    public static ProfessionsCap.IProfessionsData professions(PlayerEntity provider) {
+    public static ProfessionsCap.IProfessionsData professions(EntityPlayer provider) {
 
         if (provider != null) {
 
@@ -91,7 +92,7 @@ public class Load {
         return null;
     }
 
-    public static PlayerMapCap.IPlayerMapData playerMapData(PlayerEntity provider) {
+    public static PlayerMapCap.IPlayerMapData playerMapData(EntityPlayer provider) {
 
         if (provider != null) {
             return provider.getCapability(PlayerMapCap.Data)

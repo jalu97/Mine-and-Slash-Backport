@@ -2,8 +2,9 @@ package com.robertx22.mine_and_slash.loot;
 
 import com.robertx22.mine_and_slash.loot.gens.*;
 import com.robertx22.mine_and_slash.uncommon.capability.EntityCap.UnitData;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class MasterLootGen {
     }
 
     public static List<ItemStack> generateLoot(UnitData mob, UnitData player,
-                                               LivingEntity victim, PlayerEntity killer) {
+    		EntityLivingBase victim, EntityPlayer killer) {
 
         LootInfo info = new LootInfo(mob, player, victim, killer);
         List<ItemStack> items = generateLoot(info);
@@ -80,8 +81,8 @@ public class MasterLootGen {
         return items;
     }
 
-    public static void genAndDrop(UnitData mob, UnitData player, LivingEntity victim,
-                                  PlayerEntity killer) {
+    public static void genAndDrop(UnitData mob, UnitData player, EntityLivingBase victim,
+    		EntityPlayer killer) {
 
         List<ItemStack> items = generateLoot(mob, player, victim, killer);
 

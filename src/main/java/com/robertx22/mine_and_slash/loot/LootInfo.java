@@ -8,7 +8,10 @@ import com.robertx22.mine_and_slash.uncommon.capability.EntityCap.UnitData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.LootType;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
+
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
@@ -20,8 +23,8 @@ public class LootInfo {
 
     public UnitData mobData;
     public UnitData playerData;
-    public LivingEntity victim;
-    public PlayerEntity killer;
+    public EntityLivingBase victim;
+    public EntityPlayer killer;
     public World world;
     public float multi = 1;
     public int minItems = 0;
@@ -64,8 +67,8 @@ public class LootInfo {
 
     }
 
-    public LootInfo(UnitData mob, UnitData player, LivingEntity victim,
-                    PlayerEntity killer) {
+    public LootInfo(UnitData mob, UnitData player, EntityLivingBase victim,
+    		EntityPlayer killer) {
         this.world = victim.world;
         this.mobData = mob;
         this.playerData = player;
@@ -80,7 +83,7 @@ public class LootInfo {
         this.world = theworld;
     }
 
-    public LootInfo(PlayerEntity player) {
+    public LootInfo(EntityPlayer player) {
         this.world = player.world;
         this.playerData = Load.Unit(player);
         this.level = Load.playerMapData(player).getLevel();

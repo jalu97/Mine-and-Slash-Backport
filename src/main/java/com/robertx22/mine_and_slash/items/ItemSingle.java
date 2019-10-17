@@ -1,6 +1,6 @@
 package com.robertx22.mine_and_slash.items;
 
-import net.minecraft.item.Item.Properties;
+import net.minecraftforge.common.property.Properties;
 
 public class ItemSingle extends Properties {
 
